@@ -1,0 +1,17 @@
+query {
+  recommendedProfiles {
+        id
+      name
+      bio
+      metadata
+      isDefault
+      picture {
+        ... on MediaSet{
+          original {
+            url
+          }
+        }
+      }
+      handle
+        }
+      }
