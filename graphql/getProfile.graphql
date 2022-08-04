@@ -1,0 +1,33 @@
+query Profiles ($id: ProfileId!){
+  profiles(request: { profileIds: [$id], limit: 1 }) {
+    items {
+      id
+      name
+      bio
+      picture {
+        ... on MediaSet {
+          original {
+            url
+          }
+        }
+      }
+      handle
+      coverPicture {
+        ... on MediaSet {
+          original {
+            url
+          }
+        }
+      }
+      stats {
+        totalFollowers
+        totalFollowing
+        totalPosts
+        totalComments
+        totalMirrors
+        totalPublications
+        totalCollects
+      }
+    }
+  }
+}

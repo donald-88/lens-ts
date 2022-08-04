@@ -1,4 +1,4 @@
-query {
+query RecommendedProfiles{
   recommendedProfiles {
         id
       name
