@@ -1,8 +1,6 @@
-import apolloClient from "../api/api"
-import RecommendedProfiles from '../../graphql/recommendedProfiles.graphql'
 import GetProfiles from '../../graphql/getProfile.graphql'
+import ExplorePublications from '../../graphql/explorePublications.graphql'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from "react"
 import { useQuery } from "@apollo/client"
 
 const Profile = () => {
@@ -10,17 +8,38 @@ const Profile = () => {
     const router = useRouter()
     const { id } = router.query
 
-    const { data, loading, error } = useQuery(GetProfiles, {variables: {id}})
+    const { data: profileData, loading: profileLoad, error: profileError } = useQuery(GetProfiles, {variables: {id}})
+    const { data: pubData, loading: pubLoad, error: pubErr } = useQuery(ExplorePublications, {variables: { id }})
 
-    if(loading){ return <div>...Loading...</div>}
-    if(error){ return <div>error</div>}
-    if(!data){ return <div>Nothing to show</div>}
+    if(profileLoad){ return <div>...Loading...</div>}
+    if(profileError){ return <div>error</div>}
+    if(!profileData){ return <div>Nothing to show</div>}
+    const profile = profileData.profiles.items[0]
+
+
+    if(pubLoad){ return <div>...Loading</div>}
+    if(pubErr){ return <div>Error</div>}
+    if(!pubData){ return <div>No Posts Yet</div>}
+    const pubs = pubData.explorePublications.items
+
+    
 
     return (
         <div>
-        {
-            data.profiles.items[0].name
-        }
+            <h3>{profile.name}</h3>
+            <p>{profile.handle}</p>
+            <p>{profile.bio}</p>
+        <div>
+            {
+                pubs.map((pub, index) => (
+                    <div key={index}>
+                        {
+                            pub.metadata.content
+                        }
+                    </div>
+                ))
+            }
+        </div>
         </div>
     )
 }
