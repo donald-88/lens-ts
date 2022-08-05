@@ -26,7 +26,26 @@ const Home: NextPage = () => {
           </Link>
           
         ))
+        
+        
       }
+      
+      <div>
+        {
+            pubData.explorePublications.items.map((pub) => (
+          <div key={pub.id}>
+            <p>{pub.name}</p>
+            <p>{pub.handle}</p>
+            <p>{pub.metadata.content}</p>
+            <div>
+                <p>Collects {pub.stats.totalAmountOfCollects}</p>
+                <p>Comments {pub.stats.totalAmountOfComments}</p>
+                <p>Mirrors {pub.stats.totalAmountOfMirrors}</p>
+            </div>
+          </div>
+        ))
+        }
+      </div>
     </div>
   )
 }

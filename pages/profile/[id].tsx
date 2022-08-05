@@ -29,6 +29,22 @@ const Profile = () => {
             <h3>{profile.name}</h3>
             <p>{profile.handle}</p>
             <p>{profile.bio}</p>
+
+            <div>
+                <p>Followers {profile.stats.totalFollowers}</p>
+                <p>Following {profile.stats.totalFollowing}</p>
+                <p>Posts {profile.stats.totalPublications}</p>
+            </div>
+            
+
+            <div>
+                <button>Follow</button>
+                <button>Connect</button>
+            </div>
+
+            <div>
+                
+            </div>
         <div>
             {
                 pubs.map((pub, index) => (
