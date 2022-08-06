@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'SFUIText';
+    src: url('SFUIText-Light.otf') format('otf');
+    font-weight: light;
+    font-style: light;
+}
+
+@font-face {
+    font-family: 'SFUIText';
+    src: url('SFUIText-Bold.otf') format('otf');
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'SFUIText';
+    src: url('SFUIText-Regular.otf') format('otf');
+    font-weight: regular;
+    font-style: regular;
+}
+
+@font-face {
+    font-family: 'SFUIText';
+    src: url('SFUIText-Medium.otf') format('otf');
+    font-weight: medium;
+    font-style: medium;
+}
+
+@font-face {
+    font-family: 'SFUIText';
+    src: url('SFUIText-Semibold.otf') format('otf');
+    font-weight: semibold;
+    font-style: semibold;
+}
