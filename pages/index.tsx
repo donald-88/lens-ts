@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   if(!pubData){ return (<div>Nothing to show</div>) }
 
   return (
-    <div className='text-red-700 space-y-4'>
+    <div className='space-y-4'>
       {
         profileData.recommendedProfiles.map((profile) => (
           <Link key={profile.id} href={`/profile/${profile.id}`}>
@@ -30,12 +30,12 @@ const Home: NextPage = () => {
         
       }
       
-      <div>
+      <div className="space-y-4">
         {
             pubData.explorePublications.items.map((pub) => (
           <div key={pub.id}>
-            <p>{pub.name}</p>
-            <p>{pub.handle}</p>
+            <p>{pub.profile.name}</p>
+            <p>{pub.profile.handle}</p>
             <p>{pub.metadata.content}</p>
             <div>
                 <p>Collects {pub.stats.totalAmountOfCollects}</p>
