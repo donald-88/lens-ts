@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Avatar from '../components/avatar'
 import ProfileCard from '../components/profileCard'
+import PostCard from '../components/postCard'
 
 const Home: NextPage = () => {
 
@@ -38,16 +39,7 @@ const Home: NextPage = () => {
         <div className="space-y-4">
             {
                 pubData.explorePublications.items.map((pub) => (
-            <div key={pub.id}>
-                <p>{pub.profile.name}</p>
-                <p>{pub.profile.handle}</p>
-                <p>{pub.metadata.content}</p>
-                <div>
-                    <p>Collects {pub.stats.totalAmountOfCollects}</p>
-                    <p>Comments {pub.stats.totalAmountOfComments}</p>
-                    <p>Mirrors {pub.stats.totalAmountOfMirrors}</p>
-                </div>
-            </div>
+            <PostCard key={pub.profile.id} image={'/empty.jpg'} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
             ))
             }
         </div>
