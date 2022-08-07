@@ -3,6 +3,9 @@ import type { NextPage } from 'next'
 import RecommendedProfiles from '../graphql/recommendedProfiles.graphql'
 import ExplorePublications from '../graphql/explorePublications.graphql'
 import Link from 'next/link'
+import Image from 'next/image'
+import Avatar from '../components/avatar'
+import ProfileCard from '../components/profileCard'
 
 const Home: NextPage = () => {
 
@@ -18,35 +21,37 @@ const Home: NextPage = () => {
   if(!pubData){ return (<div>Nothing to show</div>) }
 
   return (
-    <div className='space-y-4'>
-      {
-        profileData.recommendedProfiles.map((profile) => (
-          <Link key={profile.id} href={`/profile/${profile.id}`}>
-            <div>{profile.name}</div>
-          </Link>
-          
-        ))
-        
-        
-      }
-      
-      <div className="space-y-4">
-        {
-            pubData.explorePublications.items.map((pub) => (
-          <div key={pub.id}>
-            <p>{pub.profile.name}</p>
-            <p>{pub.profile.handle}</p>
-            <p>{pub.metadata.content}</p>
-            <div>
-                <p>Collects {pub.stats.totalAmountOfCollects}</p>
-                <p>Comments {pub.stats.totalAmountOfComments}</p>
-                <p>Mirrors {pub.stats.totalAmountOfMirrors}</p>
+    <>
+        <div className='relative flex'>
+            <div className='overflow-x-scroll no-scrollbar scroll whitespace-nowrap scroll-smooth'>
+                {
+                    profileData.recommendedProfiles.map((profile) => (
+                    <Link key={profile.id} href={`/profile/${profile.id}`}>
+                        <a>
+                            <ProfileCard name={profile.name? (profile.name) : ('blank')} image='/empty.jpg'/>
+                        </a>
+                    </Link>
+                    ))
+                }
             </div>
-          </div>
-        ))
-        }
-      </div>
-    </div>
+        </div>
+        <div className="space-y-4">
+            {
+                pubData.explorePublications.items.map((pub) => (
+            <div key={pub.id}>
+                <p>{pub.profile.name}</p>
+                <p>{pub.profile.handle}</p>
+                <p>{pub.metadata.content}</p>
+                <div>
+                    <p>Collects {pub.stats.totalAmountOfCollects}</p>
+                    <p>Comments {pub.stats.totalAmountOfComments}</p>
+                    <p>Mirrors {pub.stats.totalAmountOfMirrors}</p>
+                </div>
+            </div>
+            ))
+            }
+        </div>
+    </>
   )
 }
 

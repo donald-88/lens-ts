@@ -3,8 +3,6 @@ query RecommendedProfiles{
         id
       name
       bio
-      metadata
-      isDefault
       picture {
         ... on MediaSet{
           original {
