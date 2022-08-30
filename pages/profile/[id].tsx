@@ -2,6 +2,7 @@ import GetProfiles from '../../graphql/getProfile.graphql'
 import ExplorePublications from '../../graphql/explorePublications.graphql'
 import { useRouter } from 'next/router'
 import { useQuery } from "@apollo/client"
+import Image from 'next/image'
 
 const Profile = () => {
 
@@ -26,6 +27,14 @@ const Profile = () => {
 
     return (
         <div>
+            <div className='relative'>
+                <div>
+                    <Image src={profile.coverPicture.original.url} width="40" height="40"/>
+                </div>
+                <div>
+
+                </div>
+            </div>
             <h3>{profile.name}</h3>
             <p>{profile.handle}</p>
             <p>{profile.bio}</p>

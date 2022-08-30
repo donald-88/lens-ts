@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client'
 import type { NextPage } from 'next'
-import RecommendedProfiles from '../graphql/recommendedProfiles.graphql'
-import ExplorePublications from '../graphql/explorePublications.graphql'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import Avatar from '../components/avatar'
-import ProfileCard from '../components/profileCard'
 import PostCard from '../components/postCard'
+import ProfileCard from '../components/profileCard'
+import ExplorePublications from '../graphql/explorePublications.graphql'
+import RecommendedProfiles from '../graphql/recommendedProfiles.graphql'
 
 
 const notification = (

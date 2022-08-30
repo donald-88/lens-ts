@@ -3,7 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      'ipfs.infura.io'
+      'ipfs.infura.io',
+      'lens.infura-ipfs.io'
     ]
   },
   swcMinify: true,
