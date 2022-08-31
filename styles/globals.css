@@ -10,7 +10,14 @@
     }
 
     p{
-      @apply font-sfpro
+      @apply font-sfpro text-[12px]
+    }
+
+    li{
+      @apply font-sfpro text-[12px] active:text-black text-accent
+    }
+    h3{
+      @apply text-[14px]
     }
     h1{
       @apply font-bold

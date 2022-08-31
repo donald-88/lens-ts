@@ -39,7 +39,7 @@ const PostCard = (props) => {
     <div key={props.key} className='px-4'>
         <div className='flex h-[50px] justify-between items-center'>
             <div className='flex space-x-2'>
-                <div className='w-[30px] h-[30px]'>
+                <div className='w-[30px] h-[30px] z-0'>
                     <Avatar>
                         <Image alt="profile picture" src={props.image} width="30px" height="30px" />
                     </Avatar>

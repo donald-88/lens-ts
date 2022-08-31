@@ -12,7 +12,7 @@ module.exports = {
         accent: '#A5A5A5'
       },
       fontFamily: {
-        'sfpro': ['SFPro','sans']
+        'sfpro': ['SFPro']
       }
     },
   },

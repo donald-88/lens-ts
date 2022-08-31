@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client"
 import Image from 'next/image'
+import Link from "next/link"
 import { useRouter } from 'next/router'
 import Avatar from "../../components/avatar"
 import PostCard from "../../components/postCard"
 import PrimaryButton from "../../components/primaryButton"
 import SecondaryButton from "../../components/secondaryButton"
 import ExplorePublications from '../../graphql/explorePublications.graphql'
+import GetPublications from '../../graphql/getPublications.graphql'
 import GetProfiles from '../../graphql/getProfile.graphql'
 
 const Profile = () => {
@@ -14,7 +16,7 @@ const Profile = () => {
     const { id } = router.query
 
     const { data: profileData, loading: profileLoad, error: profileError } = useQuery(GetProfiles, {variables: {id}})
-    const { data: pubData, loading: pubLoad, error: pubErr } = useQuery(ExplorePublications, {variables: { id }})
+    const { data: pubData, loading: pubLoad, error: pubErr } = useQuery(GetPublications, {variables: { id }})
 
     if(profileLoad){ return <div>...Loading...</div>}
     if(profileError){ return <div>error</div>}
@@ -25,7 +27,7 @@ const Profile = () => {
     if(pubLoad){ return <div>...Loading</div>}
     if(pubErr){ return <div>Error</div>}
     if(!pubData){ return <div>No Posts Yet</div>}
-    const pubs = pubData.explorePublications.items
+    const pubs = pubData.publications.items
 
     
 
@@ -60,10 +62,10 @@ const Profile = () => {
 
             <div className="w-full text-center">
                 <h3>{profile.name}</h3>
-                <p className="text-accent">{profile.handle}</p>
-                <p>{profile.bio}</p>
+                <p className="text-accent text-[12px]">{profile.handle}</p>
+                <p className="px-4">{profile.bio}</p>
             </div>
-            <div className="w-full flex justify-evenly">
+            <div className="w-full flex justify-evenly leading-4 mt-4">
                 <div className="text-center">
                     <h3>{profile.stats.totalFollowers}</h3>
                     <p className="text-accent">Followers</p>
@@ -81,17 +83,19 @@ const Profile = () => {
             </div>
             
 
-            <div className="w-full flex justify-center space-x-2">
+            <div className="w-full flex justify-center space-x-2 mt-4">
                 <PrimaryButton/>
                 <SecondaryButton/>
             </div>
 
-            <div className="flex justify-evenly">
-                <p>Posts</p>
-                <p>Mirrors</p>
-                <p>Collection</p>
-                <p>Media</p>
-            </div>
+            <nav>
+                <ul className="flex justify-evenly my-4">
+                    <li><Link href="#" >Post</Link></li>
+                    <li><Link href="#">Mirror</Link></li>
+                    <li><Link href="#">Collection</Link></li>
+                    <li><Link href="#">Media</Link></li>
+                </ul>
+            </nav>
         <div>
             {
                 pubs.map((pub, index) => (
