@@ -1,5 +1,6 @@
 import Avatar from './avatar'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const options = (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,13 +40,13 @@ const PostCard = (props) => {
     <div key={props.key} className='px-4'>
         <div className='flex h-[50px] justify-between items-center'>
             <div className='flex space-x-2'>
-                <div className='w-[30px] h-[30px] z-0'>
+                <div className='w-[30px] h-[30px]'>
                     <Avatar>
                         <Image alt="profile picture" src={props.image} width="30px" height="30px" />
                     </Avatar>
                 </div>
                 <div className='flex flex-col justify-start leading-4'>
-                    <p className="text-[12px] truncate">{props.name}</p>
+                    <Link href={`/profile/${props.route}`}><p className="text-[12px] truncate hover:underline cursor-pointer">{props.name}</p></Link>
                     <p className="text-[11px] truncate">@{props.handle}</p>
                 </div>
             </div>
@@ -55,18 +56,18 @@ const PostCard = (props) => {
             {props.content}
         </div>
         <div className='w-full h-[50px] px-4 flex justify-evenly items-center text-[12px]'>
-            <div className='flex space-x-2'>
+            <button className='flex space-x-2'>
                 {mirrors}
                 <p>{props.mirrors}</p>
-            </div>
-            <div className='flex space-x-2'>
+            </button>
+            <button className='flex space-x-2'>
                 {collects}
                 <p>{props.collects}</p>
-            </div>
-            <div className='flex space-x-2'>
+            </button>
+            <button className='flex space-x-2'>
                 {comments}
                 <p>{props.comments}</p>
-            </div>
+            </button>
         </div>
     </div>
   )

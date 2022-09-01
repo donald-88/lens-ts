@@ -84,7 +84,10 @@ const Profile = () => {
             
 
             <div className="w-full flex justify-center space-x-2 mt-4">
-                <PrimaryButton/>
+                <div className="w-32">
+                    <PrimaryButton title="Follow"/>
+                </div>
+                
                 <SecondaryButton/>
             </div>
 
@@ -100,7 +103,7 @@ const Profile = () => {
             {
                 pubs.map((pub, index) => (
                     <div key={index}>
-                        <PostCard key={pub.profile.id} image={'/empty.jpg'} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
+                        <PostCard key={pub.profile.id} image={pub.profile.picture.original.url} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
                     </div>
                 ))
             }

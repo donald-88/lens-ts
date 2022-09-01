@@ -45,7 +45,7 @@ const Home: NextPage = () => {
                     profileData.recommendedProfiles.map((profile) => (
                     <Link key={profile.id} href={`/profile/${profile.id}`}>
                         <a>
-                            <ProfileCard name={profile.name? (profile.name) : ('blank')} image='/empty.jpg'/>
+                            <ProfileCard name={profile.name? (profile.name) : ('blank')} image={'/empty.jpg'}/>
                         </a>
                     </Link>
                     ))
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
         <div>
             {
                 pubData.explorePublications.items.map((pub) => (
-            <PostCard key={pub.profile.id} image={'/empty.jpg'} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
+            <PostCard key={pub.profile.id} route={pub.profile.id} image={'/empty.jpg'} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
             ))
             }
         </div>

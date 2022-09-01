@@ -5,14 +5,14 @@ const SearchResult = (props) => {
     return (
         <>
             <div className="flex space-x-4 my-4">
-                <div className="w-[70px] h-[70px]">
+                <div className="w-[60px] h-[60px]">
                     <Avatar>
-                        <Image src={props.image} width="70px" height="70px"/>
+                        <Image src={props.image} width="60px" height="60px"/>
                     </Avatar>
                 </div>
                 <div className="flex flex-col justify-center leading-4">
-                    <h3>thatGuy</h3>
-                    <p>@stopplayin</p>
+                    <h3>{props.name}</h3>
+                    <p>@{props.handle}</p>
                 </div>
             </div>
             

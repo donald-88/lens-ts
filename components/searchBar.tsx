@@ -10,7 +10,7 @@ const SearchBar = (props) => {
         <input
           onChange={props.onChange}
           value={props.value}
-          className="w-full pl-12 bg-transparent border-2 border-accent rounded-[16px]" placeholder="Search">
+          className="w-full pl-12 bg-transparent border-2 border-accent rounded-[16px] text-[12px]" placeholder="Search">
         </input>
       </div>
 )

@@ -41,7 +41,7 @@ const Profile = (
 
 const BottomNav = () => {
     return(
-        <nav className="fixed bottom-0 left-0 w-full bg-primary py-2 shadow-xl shadow-black z-59">
+        <nav className="fixed bottom-0 left-0 w-full bg-primary py-1 shadow-xl shadow-black">
             <ul className="flex justify-evenly items-center h-full">
                 <li><Link href="/">{Home}</Link></li>
                 <li><Link href="/search">{Search}</Link></li>
