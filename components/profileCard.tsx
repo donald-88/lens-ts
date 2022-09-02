@@ -10,7 +10,7 @@ const ProfileCard = (props) => {
           <Image alt="profile picture" src={props.image} width="60px" height="60px" />
         </Avatar>
       </div>
-      <p className="w-full text-[11px] text-center truncate py-1">
+      <p className="w-full text-[12px] text-center truncate py-1">
         {props.name}
       </p>
     </div>

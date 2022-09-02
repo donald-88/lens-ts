@@ -1,6 +1,9 @@
 import Avatar from './avatar'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Menu, Transition } from '@headlessui/react'
+import React , { Fragment } from 'react'
+import classNames from 'classnames'
 
 const options = (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,14 +48,79 @@ const PostCard = (props) => {
                         <Image alt="profile picture" src={props.image} width="30px" height="30px" />
                     </Avatar>
                 </div>
-                <div className='flex flex-col justify-start leading-4'>
-                    <Link href={`/profile/${props.route}`}><p className="text-[12px] truncate hover:underline cursor-pointer">{props.name}</p></Link>
+                <div className='flex flex-col justify-start leading-3'>
+                    <Link href={`/profile/${props.route}`}><p className="text-sm truncate hover:underline cursor-pointer">{props.name}</p></Link>
                     <p className="text-[11px] truncate">@{props.handle}</p>
                 </div>
             </div>
-            <div className='rotate-90'>{options}</div>
+            <div>
+                <Menu as="div" className="relative inline-block text-left">
+      <div>
+        <Menu.Button className="rotate-90">
+        {options}
+          
+        </Menu.Button>
+      </div>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-primary shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Follow User
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Embed
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-red-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Report
+                </a>
+              )}
+            </Menu.Item>
+           
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+            </div>
+            
         </div>
-        <div className='w-full max-h-[237px] overflow-hidden text-[12px] text-justify'>
+        <div className='w-full max-h-[237px] overflow-hidden text-sm text-justify'>
             {props.content}
         </div>
         <div className='w-full h-[50px] px-4 flex justify-evenly items-center text-[12px]'>
