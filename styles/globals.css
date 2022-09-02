@@ -14,7 +14,7 @@
     }
 
     li{
-      @apply font-sfpro text-[12px] active:text-black text-accent
+      @apply font-sfpro text-[12px] active:text-black text-accent hover:cursor-pointer
     }
     h3{
       @apply text-[14px]
