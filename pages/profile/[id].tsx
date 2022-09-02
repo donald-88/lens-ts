@@ -9,6 +9,11 @@ import SecondaryButton from "../../components/secondaryButton"
 import ExplorePublications from '../../graphql/explorePublications.graphql'
 import GetPublications from '../../graphql/getPublications.graphql'
 import GetProfiles from '../../graphql/getProfile.graphql'
+import { ethers } from 'ethers'
+
+import ABI from '../../abi.json'
+
+const address = '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d'
 
 const Profile = () => {
 
@@ -29,7 +34,32 @@ const Profile = () => {
     if(!pubData){ return <div>No Posts Yet</div>}
     const pubs = pubData.publications.items
 
-    
+    async function connect(){
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts"
+        })
+        console.log({accounts})
+    }
+
+    async function follow(){
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer = provider.getSigner()
+
+        const contract = new ethers.Contract(
+            address,
+            ABI,
+            signer
+        )
+        try {
+            const tx = await contract.follow(
+                [id], [0x0]
+            )
+            await tx.wait()
+            console.log("Followed user")
+        } catch (err) {
+            console.log({ err })
+        }
+    }
 
     return (
         <>
@@ -85,10 +115,10 @@ const Profile = () => {
 
             <div className="w-full flex justify-center space-x-2 mt-4">
                 <div className="w-32">
-                    <PrimaryButton title="Follow"/>
+                    <PrimaryButton title="Follow" onClick={follow}/>
                 </div>
                 
-                <SecondaryButton/>
+                <SecondaryButton onClick={connect}/>
             </div>
 
             <nav>
