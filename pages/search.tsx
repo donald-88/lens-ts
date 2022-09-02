@@ -8,11 +8,9 @@ import { useState } from "react"
 
 const Search = () => {
 
-    const name = 'josh'
-
     const [searchTerm, setSearchTerm] = useState("")
 
-    const { data: searchData, error: searchError, loading: searchLoading} = useQuery(SearchProfile,{variables: {name}})
+    const { data: searchData, error: searchError, loading: searchLoading} = useQuery(SearchProfile,{variables: {query: searchTerm}})
 
     if(searchError){ return (<div>{searchError.message}</div>) }
   if(searchLoading){ return (<div>Loading....</div>)}

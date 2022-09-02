@@ -82,7 +82,7 @@ const PostCard = (props) => {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  Follow User
+                  Follow @{props.handle}
                 </a>
               )}
             </Menu.Item>

@@ -1,5 +1,5 @@
 query Search($query: Search!) {
-	search(request: { query: [$query], type: PROFILE, limit: 10 }) {
+	search(request: { query: $query, type: PROFILE, limit: 10 }) {
 		... on ProfileSearchResult {
 			__typename
 			items {

@@ -10,6 +10,8 @@ import ExplorePublications from '../../graphql/explorePublications.graphql'
 import GetPublications from '../../graphql/getPublications.graphql'
 import GetProfiles from '../../graphql/getProfile.graphql'
 import { ethers } from 'ethers'
+import { Tab } from '@headlessui/react'
+import { Fragment, useState } from 'react'
 
 import ABI from '../../abi.json'
 
@@ -17,22 +19,26 @@ const address = '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d'
 
 const Profile = () => {
 
+    const [type, setType] = useState("POST")
+
     const router = useRouter()
     const { id } = router.query
 
-    const { data: profileData, loading: profileLoad, error: profileError } = useQuery(GetProfiles, {variables: {id}})
-    const { data: pubData, loading: pubLoad, error: pubErr } = useQuery(GetPublications, {variables: { id }})
+    const { data: profileData, loading: profileLoad, error: profileError } = useQuery(GetProfiles, {variables: {id: id}})
+    const { data: pubData, loading: pubLoad, error: pubErr } = useQuery(GetPublications, {variables: { id: id, type: type }})
 
     if(profileLoad){ return <div>...Loading...</div>}
-    if(profileError){ return <div>error</div>}
+    if(profileError){ return <div>{profileError.message}</div>}
     if(!profileData){ return <div>Nothing to show</div>}
     const profile = profileData.profiles.items[0]
 
 
     if(pubLoad){ return <div>...Loading</div>}
-    if(pubErr){ return <div>Error</div>}
+    if(pubErr){ return <div>{pubErr.message}</div>}
     if(!pubData){ return <div>No Posts Yet</div>}
     const pubs = pubData.publications.items
+
+    
 
     async function connect(){
         const accounts = await window.ethereum.request({
@@ -61,6 +67,18 @@ const Profile = () => {
         }
     }
 
+    
+
+
+    const tabContent = <div>
+        {
+                    pubs.map((pub, index) => (
+                        <div key={index}>
+                            <PostCard key={pub.profile.id} image={pub.profile.picture.original.url} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
+                        </div>
+                    ))
+                }
+    </div>
     return (
         <>
         <div>
@@ -121,23 +139,50 @@ const Profile = () => {
                 <SecondaryButton onClick={connect}/>
             </div>
 
-            <nav>
-                <ul className="flex justify-evenly my-4">
-                    <li><Link href="#" >Post</Link></li>
-                    <li><Link href="#">Mirror</Link></li>
-                    <li><Link href="#">Collection</Link></li>
-                    <li><Link href="#">Media</Link></li>
-                </ul>
-            </nav>
-        <div>
-            {
-                pubs.map((pub, index) => (
-                    <div key={index}>
-                        <PostCard key={pub.profile.id} image={pub.profile.picture.original.url} name={pub.profile.name} handle={pub.profile.handle} content={pub.metadata.content} mirrors={pub.stats.totalAmountOfMirrors} collects={pub.stats.totalAmountOfCollects} comments={pub.stats.totalAmountOfComments}/>
-                    </div>
-                ))
-            }
-        </div>
+            <div>
+                <Tab.Group>
+                    <Tab.List className="flex justify-evenly w-full text-sm py-4">
+                        <Tab as={Fragment}>
+                            {({ selected }) => (
+                                <button onClick={() =>setType("POST")} className={selected? 'text-black' : 'text-accent'}>
+                                    Post
+                                </button>
+                            )}
+                        </Tab>
+                        <Tab as={Fragment}>
+                            {({ selected }) => (
+                                <button onClick={() => setType("MIRROR")} className={selected? 'text-black' : 'text-accent'}>
+                                    Mirrors
+                                </button>
+                            )}
+                        </Tab>
+                        <Tab as={Fragment}>
+                            {({ selected }) => (
+                                <button onClick={() => setType("COMMENT")} className={selected? 'text-black' : 'text-accent'}>
+                                    Comments
+                                </button>
+                            )}
+                        </Tab>
+                        <Tab as={Fragment}>
+                            {({ selected }) => (
+                                <button className={selected? 'text-black' : 'text-accent'}>
+                                    Media
+                                </button>
+                            )}
+                        </Tab>
+                    </Tab.List>
+                    <Tab.Panels>
+                        <Tab.Panel>{tabContent}</Tab.Panel>
+                        <Tab.Panel>{tabContent}</Tab.Panel>
+                        <Tab.Panel>{tabContent}</Tab.Panel>
+                        <Tab.Panel>Content 4</Tab.Panel>
+                    </Tab.Panels>
+                </Tab.Group>
+                <div className="h-10"/>
+            </div>
+            <div>
+                
+            </div>
         </div>
         </>
     )
