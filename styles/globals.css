@@ -6,11 +6,15 @@
 
 @layer base{
     body{
-        @apply font-sfpro bg-primary text-gray-700
+        @apply font-sfpro bg-primary
     }
 
     p{
-      @apply font-sfpro text-[12px]
+      @apply font-sfpro text-xs leading-4
+    }
+
+    button{
+      @apply text-xs
     }
 
     li{
@@ -19,8 +23,12 @@
     h3{
       @apply text-[14px]
     }
+
+    h2{
+      @apply text-base font-semibold
+    }
     h1{
-      @apply font-bold
+      @apply font-bold text-[20px]
     }
     
       .no-scrollbar::-webkit-scrollbar {

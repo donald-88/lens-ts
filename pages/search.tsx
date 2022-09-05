@@ -5,6 +5,7 @@ import SearchProfile from '../graphql/searchProfile.graphql'
 
 import Link from "next/link"
 import { useState } from "react"
+import Loader from "../components/loader"
 
 const Search = () => {
 
@@ -13,7 +14,7 @@ const Search = () => {
     const { data: searchData, error: searchError, loading: searchLoading} = useQuery(SearchProfile,{variables: {query: searchTerm}})
 
     if(searchError){ return (<div>{searchError.message}</div>) }
-  if(searchLoading){ return (<div>Loading....</div>)}
+  if(searchLoading){ return (<Loader/>)}
   if(!searchData){ return (<div>Nothing to show</div>)}
 
 
@@ -21,11 +22,11 @@ const Search = () => {
         <div className="px-4">
             <div className="h-8"/>
             <SearchBar onChange={event => setSearchTerm(event.target.value)} value={searchTerm}/>
-            {
-                searchData.search.items.map((search, index) => (
-                    <Link key={index} href={`/profile/${search.profile.id}`}>
+            { 
+                searchData.search.items.map((post, index) => (
+                    <Link key={index} href={`/profile/${post.profile.id || post.profile.profileId}`}>
                         <a>
-                            <SearchResult name={search.profile.name? (search.profile.name) : ('blank')} handle={search.profile.handle} image='/empty.jpg'/>
+                            <SearchResult name={post.profile.name? (post.profile.name) : ('blank')} handle={post.profile.handle} image='/empty.jpg'/>
                         </a>
                     </Link>
                 ))

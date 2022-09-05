@@ -14,12 +14,14 @@ import { Tab } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
 import ABI from '../../abi.json'
+import Loader from "../../components/loader"
 
 const address = '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d'
 
 const Profile = () => {
 
     const [type, setType] = useState("POST")
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
     const { id } = router.query
@@ -27,15 +29,17 @@ const Profile = () => {
     const { data: profileData, loading: profileLoad, error: profileError } = useQuery(GetProfiles, {variables: {id: id}})
     const { data: pubData, loading: pubLoad, error: pubErr } = useQuery(GetPublications, {variables: { id: id, type: type }})
 
-    if(profileLoad){ return <div>...Loading...</div>}
+    if(profileLoad){ return (<Loader/>)}
     if(profileError){ return <div>{profileError.message}</div>}
     if(!profileData){ return <div>Nothing to show</div>}
+    if(profileData){() => setIsLoading(isLoading!)}
     const profile = profileData.profiles.items[0]
 
 
-    if(pubLoad){ return <div>...Loading</div>}
+    if(pubLoad){ return (<Loader/>)}
     if(pubErr){ return <div>{pubErr.message}</div>}
     if(!pubData){ return <div>No Posts Yet</div>}
+    if(pubData){() => setIsLoading(isLoading!)}
     const pubs = pubData.publications.items
 
     
@@ -80,7 +84,9 @@ const Profile = () => {
                 }
     </div>
     return (
+        
         <>
+        
         <div>
             <div className='flex flex-col items-center w-full h-[170px]'>
                 <div className="w-full h-[140px] bg-accent overflow-hidden relative">
@@ -178,7 +184,7 @@ const Profile = () => {
                         <Tab.Panel>Content 4</Tab.Panel>
                     </Tab.Panels>
                 </Tab.Group>
-                <div className="h-10"/>
+                <div className="h-12"/>
             </div>
             <div>
                 

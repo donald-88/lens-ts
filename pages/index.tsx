@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import Avatar from '../components/avatar'
+import Loader from '../components/loader'
 import PostCard from '../components/postCard'
 import ProfileCard from '../components/profileCard'
 import ExplorePublications from '../graphql/explorePublications.graphql'
@@ -23,11 +24,11 @@ const Home: NextPage = () => {
   const { data: pubData, error: pubError, loading: pubLoading} = useQuery(ExplorePublications)
 
   if(profileError){ return (<div>{profileError.message}</div>) }
-  if(profileLoading){ return (<div>Loading....</div>)}
+  if(profileLoading){ return (<Loader/>)}
   if(!profileData){ return (<div>Nothing to show</div>)}
 
   if(pubError){ return (<div>{pubError.message}</div>) }
-  if(pubLoading){ return (<div>Loading....</div>) }
+  if(pubLoading){ return (<Loader/>) }
   if(!pubData){ return (<div>Nothing to show</div>) }
 
   return (
@@ -62,6 +63,7 @@ const Home: NextPage = () => {
             ))
             }
         </div>
+        <div className='h-12'/>
     </>
   )
 }

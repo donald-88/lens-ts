@@ -6,7 +6,7 @@ import PrimaryButton from "../components/primaryButton"
 const Post = () => {
     return (
         <div className="px-4">
-            <div className="h-8"/>
+            <div className="h-4"/>
             <div className="flex justify-end">
                 <div className="w-16">
                     <PrimaryButton title="Post"/>
@@ -25,8 +25,13 @@ const Post = () => {
                 </div>
                 
             </div>
-            <div className="h-full flex items-start">
-                <input className="bg-transparent text-[12px] w-full focus:outline-none break-normal" placeholder="Type something here..."/>
+            <div className="h-48 flex items-start py-4">
+                <textarea className="break-all h-full bg-transparent text-[12px] w-full focus:outline-none break-normal" placeholder="Type something here..."/>
+            </div>
+            <div className="flex space-x-2">
+                <button>Photo</button>
+                <button>Gif</button>
+                <button>Emoji</button>
             </div>
             </div>
             <div className="w-full flex justify-end ">
